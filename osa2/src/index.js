@@ -5,10 +5,6 @@ import ReactDOM from 'react-dom'
 
 
 
-const Yhteensa = ({ parts }) => (
-    <p>yhteensä {parts.map(part => part.exercises).reduce((p, n) => p + n)} tehtävää</p>
-)
-
 const courses = {
     name: 'Half Stack -sovelluskehitys',
     parts: [

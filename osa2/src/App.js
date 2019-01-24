@@ -1,6 +1,8 @@
 import React from 'react'
 import Course from './Course'
 
+
+
 const App = () => {
   
   const course = {
@@ -28,6 +30,7 @@ const App = () => {
   return (
     <div>
       <Course course={course} />
+      <Course all ={all}/>
       
     </div>
   )

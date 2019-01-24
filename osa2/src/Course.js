@@ -4,6 +4,7 @@ const Header = ({ course }) => (
     <h1>{course.name}</h1>
 )
 
+
 const Part = ({ part, exercises }) => (
     <p>{part} {exercises}</p>
 )
@@ -13,6 +14,10 @@ const Consist = ({ parts }) => (
         <Part key={part.name} part={part.name} exercises={part.exercises} />
     ))
 )
+
+const all = (props) =>{
+    const {course} = props
+}
 const Course = (props) => {  console.log(props)  
     const { course } = props
      return (
@@ -20,6 +25,7 @@ const Course = (props) => {  console.log(props)
           <Header course={course} />
           <Part parts = {course.parts}/>
           <Consist parts = {course.parts}/>
+          
         </div>
     )
 }
