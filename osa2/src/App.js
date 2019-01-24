@@ -30,7 +30,6 @@ const App = () => {
   return (
     <div>
       <Course course={course} />
-      <Course all ={all}/>
       
     </div>
   )

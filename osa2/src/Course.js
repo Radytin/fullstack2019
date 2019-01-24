@@ -14,10 +14,10 @@ const Consist = ({ parts }) => (
         <Part key={part.name} part={part.name} exercises={part.exercises} />
     ))
 )
+const Total = ({ parts }) => (
+    <p>yhteensä {parts.map(part => part.exercises).reduce((p, n) => p + n)} tehtävää</p>
+)
 
-const all = (props) =>{
-    const {course} = props
-}
 const Course = (props) => {  console.log(props)  
     const { course } = props
      return (
@@ -25,6 +25,7 @@ const Course = (props) => {  console.log(props)
           <Header course={course} />
           <Part parts = {course.parts}/>
           <Consist parts = {course.parts}/>
+          <Total parts = {course.parts}/>
           
         </div>
     )
