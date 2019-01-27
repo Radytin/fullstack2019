@@ -42,17 +42,20 @@ const App = () => {
     }
   }
 
-  const removeName = (event) =>{
-    event.preventDefault()
-    if (window.confirm('Poistetaanko ')) {
-    
-  
+  const removeName = (id, name) => {
+    if (window.confirm('Poistetaanko ' + name)) {
+      personsService.remove(id)
+
+    setPersons(persons.filter(person => person.id !== id))
     }
   }
+
+  
 
 
   
     console.log(persons)
+    
   const handleFiltering = (event) => { 
     console.log(event.target.value) 
     setFilterCondition(event.target.value)  }
@@ -66,6 +69,8 @@ const App = () => {
   const handleNameChange = (event) => { 
        console.log(event.target.value) 
        setNewName(event.target.value)  }
+
+
        
   
 
