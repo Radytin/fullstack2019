@@ -3,7 +3,7 @@ import Filter from './components/Filter'
 import Personform from './components/Personform'
 import Persons from './components/Persons'
 import personsService from './services/personsService'
-import Person from './components/Person'
+
 
 const App = () => {
   const [ persons, setPersons] = useState([
@@ -15,6 +15,28 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [condition, setFilterCondition] =useState('')
+  const [success, setSuccess] = useState(true)
+  const [notification, setNotication ] = useState(null)
+
+
+  const Notification = ({notification, success}) => {
+
+    if (notification !== null && success) {
+        return(
+            <div className="success">
+                {notification}
+            </div>
+        )
+    } else if (notification !== null && !success) {
+        return(
+            <div className='error'>
+                {notification}
+            </div>
+        )
+    } else {
+        return null
+    }
+}
 
 
   useEffect(() => {
@@ -36,6 +58,8 @@ const App = () => {
       }
       personsService.create(nameObject).then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setNotication('Lisättiin henkilö ' + newName)
+          setSuccess(true)
           setNewName('')
           setNewNumber('')
         }) 
@@ -44,6 +68,8 @@ const App = () => {
 
   const removeName = (id, name) => {
     if (window.confirm('Poistetaanko ' + name)) {
+      setNotication('Poistettiin henkilö ' + name)
+      setSuccess()
       personsService.remove(id)
 
     setPersons(persons.filter(person => person.id !== id))
@@ -77,6 +103,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification notification={notification} success={success} />
       <h2>Puhelinluettelo</h2>
       <div> 
         <Filter filterCondition={condition} handleFiltering={handleFiltering}/> 

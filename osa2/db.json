@@ -1,11 +1,6 @@
 {
   "persons": [
     {
-      "name": "Martti Tienari",
-      "number": "040-123456",
-      "id": 2
-    },
-    {
       "name": "Arto Järvinen",
       "number": "040-123456",
       "id": 3
@@ -24,6 +19,11 @@
       "name": "Koiru",
       "number": "1621786281",
       "id": 6
+    },
+    {
+      "name": "kisseli kissu",
+      "number": "89374289374",
+      "id": 8
     }
   ]
 }
