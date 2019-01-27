@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import Personform from './components/Personform'
 import Persons from './components/Persons'
-
+import personsService from './services/personsService'
+import Person from './components/Person'
 
 const App = () => {
   const [ persons, setPersons] = useState([
@@ -14,25 +15,42 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [condition, setFilterCondition] =useState('')
+
+
+  useEffect(() => {
+    personsService.getAll().then(initialPersons => {
+        setPersons(initialPersons)
+      })}, [])
   
 
   
 
-  const addName = (event) => {
+   const addName = (event) => {
     event.preventDefault()
-  
-      if (persons.map((person) => person.name).includes(newName)) {
-        alert(newName + ' on jo luettelossa')
-      } else {
-        const nameObject = {
-          name: newName,
-          number: newNumber
-        }
-        setPersons(persons.concat(nameObject))
-        setNewName('')
-        setNewNumber('')
+    if (persons.map((person) => person.name).includes(newName)) {
+      alert(newName + ' on jo luettelossa')
+    } else {
+      const nameObject = {
+        name: newName,
+        number: newNumber
       }
+      personsService.create(nameObject).then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        }) 
     }
+  }
+
+  const removeName = (event) =>{
+    event.preventDefault()
+    if (window.confirm('Poistetaanko ')) {
+    
+  
+    }
+  }
+
+
   
     console.log(persons)
   const handleFiltering = (event) => { 
@@ -63,7 +81,7 @@ const App = () => {
       </div>
       <h2>Numerot</h2>
        <div>
-          <Persons persons={persons} filterCondition={condition}/> 
+          <Persons persons={persons} filterCondition={condition} removeName ={removeName}/>
         </div>
      
       

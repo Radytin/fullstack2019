@@ -1,10 +1,11 @@
+import React from 'react'
+const Person = ({person, removeName}) => {
 
-import React from 'react';
-
-const Person = (props) => {
-    return(
-       <p>{props.name}{props.number}</p>
+    return (
+        <p>
+          {person.name} {person.number} <button onClick={removeName}>poista</button>
+        </p>
     )
 }
 
-export default Person
+export default Person 

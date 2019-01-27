@@ -1,21 +1,19 @@
-import React, { Component}  from 'react';
+import React from 'react'
+import Person from './Person'
 
-
-
-const Persons = ({persons, condition}) => {
+const Persons = ({persons, condition, removeName}) => {
     const personsToShow = persons.filter(person => !condition || (condition && person.name.toUpperCase().includes(condition.toUpperCase())))
-
-     const rows = () => personsToShow.map(person => 
-        <p key={person.name}>
-          {person.name} {person.number}
-        </p>
-      )
-
-     return (
+  
+    return (
       <div>
-        {rows()}
+          {personsToShow.map(person =>
+          <Person 
+            key={person.id}
+            person={person}
+            removeName = {() => removeName(person.id, person.name)} 
+          />)}
       </div>
     )
   }
 
- export default Persons 
+export default Persons
