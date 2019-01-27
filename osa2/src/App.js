@@ -1,56 +1,35 @@
-import React from 'react'
-import Course from './Course'
-
-
+import React, { useState } from 'react'
+import Person from './Person'
 
 const App = () => {
-  
-  const courses = [
-    {
-      name: 'Half Stack -sovelluskehitys',
-      id: 1,
-      parts: [
-        {
-          name: 'Reactin perusteet',
-          exercises: 10,
-          id: 1
-        },
-        {
-          name: 'Tiedonvälitys propseilla',
-          exercises: 7,
-          id: 2
-        },
-        {
-          name: 'Komponenttien tila',
-          exercises: 14,
-          id: 3
-        }
-      ]
-    },
-    {
-      name: 'Node.js',
-      id: 2,
-      parts: [
-        {
-          name: 'Routing',
-          exercises: 2,
-          id: 1
-        },
-        {
-          name: 'Middlewaret',
-          exercises: 7,
-          id: 2
-        }
-      ]
-    }
-  ]
+  const [ persons, setPersons] = useState([
+    { name: 'Arto Hellas' }
+  ]) 
+  const [ newName, setNewName ] = useState('')
  
+ 
+    
 
- 
   return (
     <div>
-        {courses.map(course => <Course key={course.id} course={course}/>)}
+      <h2>Puhelinluettelo</h2>
+      <form>
+        <div>
+          nimi: <input />
+        </div>
+        <div>
+          <button type="submit">lisää</button>
+        </div>
+      </form>
+      <h2>Numerot</h2>
+      <div><tbody>
+                {persons.map(person => <Person key={person.name} name={person.name}/>)}
+            </tbody></div>
+     
+      
     </div>
   )
-};
+
+}
+
 export default App
