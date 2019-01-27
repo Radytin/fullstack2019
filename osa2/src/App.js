@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Person from './Person'
 
+
 const App = () => {
   const [ persons, setPersons] = useState([
     { name: 'Arto Hellas' }
@@ -12,14 +13,20 @@ const App = () => {
 
   const addName = (event) => {
     event.preventDefault()
-    const personObject = {
-      content: newName,
-      id: persons.length + 1,
+  
+      if (persons.map((person) => person.name).includes(newName)) {
+        alert(newName + ' on jo luettelossa')
+      } else {
+        const nameObject = {
+          name: newName
+        }
+        setPersons(persons.concat(nameObject))
+        setNewName('')
+      }
     }
   
-    setPersons(persons.concat(personObject))
-    setNewName('')
-  }
+    console.log(persons)
+  
 
   const handleNameChange = (event) => { 
        console.log(event.target.value) 
