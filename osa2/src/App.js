@@ -43,28 +43,34 @@ const App = () => {
     personsService.getAll().then(initialPersons => {
         setPersons(initialPersons)
       })}, [])
-  
+
+  const nameObject = {
+        name: newName,
+        number: newNumber}
+
 
   
 
    const addName = (event) => {
     event.preventDefault()
     if (persons.map((person) => person.name).includes(newName)) {
-      alert(newName + ' on jo luettelossa')
-    } else {
-      const nameObject = {
-        name: newName,
-        number: newNumber
+      if (window.confirm(newName + ' on jo luettelossa, korvataanko vanha numero uudella?')) {
+        const id = persons.find(n => n.name === newName).id
+        personsService.update(id, nameObject).then(returnedPerson => {
+            setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+          })
+        setNewName('')
+        setNewNumber('')
       }
+    } else {
       personsService.create(nameObject).then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
-          setNotication('Lisättiin henkilö ' + newName)
-          setSuccess(true)
           setNewName('')
           setNewNumber('')
         }) 
     }
   }
+
 
   const removeName = (id, name) => {
     if (window.confirm('Poistetaanko ' + name)) {
