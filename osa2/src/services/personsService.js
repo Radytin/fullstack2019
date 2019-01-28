@@ -8,17 +8,23 @@ const getAll = () => {
 
 const create = (newObject) => {
     const request = axios.post(baseUrl, newObject)
-    return request.then(response => response.data)
+    return request.then(response => response.data, console.log('success!')).catch(error => {
+        console.log('error creating new object')
+      })
 }
 
 const update = (id, newObject) => {
     const request = axios.put(baseUrl + '/' + id, newObject)
-    return request.then(response => response.data)
+    return request.then(response => response.data, console.log('success!')).catch(error => {
+        console.log('error creating updating object')
+      })
 }
 
 const remove = (id) => {
     const request = axios.delete(baseUrl + '/' + id)
-    return request.then(response => response.data)
+    return request.then(response => response.data, console.log('success!')).catch(error => {
+        console.log('error creating removing object')
+      })
 }
 
 export default {getAll, create, update, remove}
