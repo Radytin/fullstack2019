@@ -9,7 +9,7 @@ blogsRouter.get('/', (request, response) => {
       })
   })
   
-  blogsRouter.post('/', (request, response) => {
+blogsRouter.post('/', (request, response) => {
     const blog = new Blog(request.body)
   
     blog
@@ -19,6 +19,16 @@ blogsRouter.get('/', (request, response) => {
       })
 
   })
+
+  blogsRouter.delete('/:id', async (request, response, next) => {
+    try {
+      await Blog.findByIdAndRemove(request.params.id)
+      response.status(204).end()
+    } catch (exception) {
+      next(exception)
+    }
+  })
+
 
 
 module.exports = blogsRouter
