@@ -4,16 +4,20 @@
   "description": "osa4",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "jest --verbose"
+    "start": "NODE_ENV=production node index.js",
+    "watch": "NODE_ENV=development nodemon index.js",
+    "test": "NODE_ENV=test jest --verbose --runInBand",
+    "lint": "eslint ."
   },
   "author": "Kreetta Hämäläinen",
   "license": "MIT",
   "devDependencies": {
+    "cross-env": "^5.2.0",
     "eslint": "^5.14.0",
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.1.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "supertest": "^3.4.2"
   },
   "dependencies": {
     "cors": "^2.8.5",
